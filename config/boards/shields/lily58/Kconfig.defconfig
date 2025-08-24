@@ -1,5 +1,5 @@
 
-if SHIELD_LILY58_LEFT
+if SHIELD_LILY58_DONGLE
 
 config ZMK_KEYBOARD_NAME
     default "Lily58"
@@ -45,4 +45,5 @@ endchoice
 endif # LVGL
 
 endif
+
 

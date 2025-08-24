@@ -1,5 +1,4 @@
-
-if SHIELD_LILY58_DONGLE
+if SHIELD_LILY58_CENTRAL_DONGLE
 
 config ZMK_KEYBOARD_NAME
     default "Lily58"
@@ -9,7 +8,7 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif
 
-if SHIELD_LILY58_LEFT || SHIELD_LILY58_RIGHT
+if SHIELD_LILY58_CENTRAL_DONGLE || SHIELD_LILY58_LEFT || SHIELD_LILY58_RIGHT
 
 config ZMK_SPLIT
     default y
@@ -22,17 +21,18 @@ config I2C
 config SSD1306
     default y
 
-config SSD1306_REVERSE_MODE
-    default y
+choice ZMK_DISPLAY_WORK_QUEUE
+    default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
+endchoice
 
-endif # ZMK_DISPLAY
+endif
 
-if LVGL
+if SSD1306
 
 config LV_Z_VDB_SIZE
     default 64
 
-config LV_Z_DPI
+config LV_DPI_DEF
     default 148
 
 config LV_Z_BITS_PER_PIXEL
@@ -42,8 +42,16 @@ choice LV_COLOR_DEPTH
     default LV_COLOR_DEPTH_1
 endchoice
 
-endif # LVGL
-
 endif
 
+if ZMK_BACKLIGHT
 
+config PWM
+    default y
+
+config LED_PWM
+    default y
+
+endif # ZMK_BACKLIGHT
+
+endif
